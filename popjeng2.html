@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>POPJENG</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0f172a;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+      user-select: none;
+    }
+    h1 {
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+    #pop-area {
+      cursor: pointer;
+    }
+    #friend-img {
+      max-width: 90vw;
+      max-height: 70vh;
+      transition: transform 0.1s ease;
+    }
+    .score {
+      margin-top: 10px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>POPJENG</h1>
+  <div id="pop-area">
+    <img id="friend-img" src="https://sunsunsun.sirv.com/IMG_0340.png" alt="friend">
+  </div>
+  <div class="score">คะแนน: <span id="score">0</span></div>
+
+  <script>
+    const FRIEND_NORMAL = 'https://sunsunsun.sirv.com/IMG_0340.png'; // ปกติ
+    const FRIEND_CLICK  = 'https://sunsunsun.sirv.com/IMG_0339.png'; // ตอนกด
+
+    const img = document.getElementById('friend-img');
+    const popArea = document.getElementById('pop-area');
+    const scoreEl = document.getElementById('score');
+
+    let score = 0;
+
+    function pop() {
+      score++;
+      scoreEl.textContent = score;
+      img.src = FRIEND_CLICK;
+      img.style.transform = 'scale(1.05)';
+      setTimeout(() => {
+        img.src = FRIEND_NORMAL;
+        img.style.transform = 'scale(1)';
+      }, 120);
+    }
+
+    popArea.addEventListener('click', pop);
+    window.addEventListener('keydown', e => {
+      if (e.code === 'Space' || e.key === 'Enter') {
+        e.preventDefault();
+        pop();
+      }
+    });
+  </script>
+</body>
+</html>
